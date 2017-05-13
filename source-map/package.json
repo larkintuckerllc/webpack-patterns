@@ -1,5 +1,5 @@
 {
-  "name": "production",
+  "name": "source-map",
   "version": "1.0.0",
   "description": "",
   "main": "./src/index.js",
