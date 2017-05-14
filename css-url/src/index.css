@@ -1,0 +1,10 @@
+body {
+  background-color: yellow;
+}
+#root {
+  height: 400px;
+  background-image: url('cute.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
