@@ -1,5 +1,6 @@
-const cat = require('./cat');
-const dog = require('./dog');
+import './index.css';
+// const cat = require('./cat');
+// const dog = require('./dog');
 
 const rootEl = document.getElementById('root');
 const catButtonEl = document.createElement('button');
@@ -13,12 +14,20 @@ const clearDisplay = () => {
 catButtonEl.innerText = 'cat';
 catButtonEl.addEventListener('click', () => {
   clearDisplay();
-  displayEl.appendChild(cat());
+  // displayEl.appendChild(cat());
+  require.ensure(['./cat'], () => {
+    const cat = require('./cat');
+    displayEl.appendChild(cat());
+  });
 });
 dogButtonEl.innerText = 'dog';
 dogButtonEl.addEventListener('click', () => {
   clearDisplay();
-  displayEl.appendChild(dog());
+  // displayEl.appendChild(dog());
+  require.ensure(['./dog'], () => {
+    const dog = require('./dog');
+    displayEl.appendChild(dog());
+  });
 });
 rootEl.appendChild(catButtonEl);
 rootEl.appendChild(dogButtonEl);
