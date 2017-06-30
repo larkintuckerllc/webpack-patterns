@@ -1,5 +1,5 @@
 import cute from './cute.jpg';
-import styles from './index.scss';
+import styles from './index.css';
 
 module.exports = () => {
   const catEl = document.createElement('div');

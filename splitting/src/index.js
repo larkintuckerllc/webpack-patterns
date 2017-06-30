@@ -1,4 +1,3 @@
-import './index.css';
 // const cat = require('./cat');
 // const dog = require('./dog');
 
