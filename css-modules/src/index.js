@@ -12,13 +12,13 @@ const clearDisplay = () => {
 catButtonEl.innerText = 'cat';
 catButtonEl.addEventListener('click', () => {
   clearDisplay();
-  System.import('./cat')
+  import('./cat')
   .then(cat => displayEl.appendChild(cat.default()));
 });
 dogButtonEl.innerText = 'dog';
 dogButtonEl.addEventListener('click', () => {
   clearDisplay();
-  System.import('./dog')
+  import('./dog')
   .then(dog => displayEl.appendChild(dog.default()));
 });
 rootEl.appendChild(catButtonEl);

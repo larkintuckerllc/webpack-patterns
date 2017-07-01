@@ -20,7 +20,8 @@ module.exports = function(env) {
           exclude: /node_modules/,
           loader: 'babel-loader',
           options: {
-            presets: ['es2015']
+            presets: ['es2015'],
+            plugins: ['syntax-dynamic-import'],
           }
         },
         {
