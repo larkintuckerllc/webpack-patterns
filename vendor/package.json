@@ -1,5 +1,5 @@
 {
-  "name": "chunkhash-fix",
+  "name": "vendor",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.html",
@@ -33,6 +33,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "babel-polyfill": "^6.23.0"
+    "babel-polyfill": "^6.23.0",
+    "sillyname": "^0.1.0"
   }
 }
