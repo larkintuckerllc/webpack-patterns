@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import './index.css';
 
+window.console.log(process.env.NODE_ENV);
 const rootEl = document.getElementById('root');
 const catButtonEl = document.createElement('button');
 const dogButtonEl = document.createElement('button');
