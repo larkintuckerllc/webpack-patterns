@@ -7,12 +7,9 @@ export default getComponent => (
       this.state = { DynamicComponent: null };
     }
     componentWillMount() {
-      const { DynamicComponent } = this.state;
-      if (DynamicComponent === null) {
-        getComponent().then(({ default: Component }) => {
-          this.setState({ DynamicComponent: Component });
-        });
-      }
+      getComponent().then(({ default: Component }) => {
+        this.setState({ DynamicComponent: Component });
+      });
     }
     render() {
       const { DynamicComponent } = this.state;
