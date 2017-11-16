@@ -5,6 +5,7 @@
   "main": "./dist/index.html",
   "scripts": {
     "build": "./node_modules/.bin/webpack -p --env.NODE_ENV=production",
+    "analyze": "./node_modules/.bin/webpack -p --env.NODE_ENV=production --env.analyze",
     "start": "./node_modules/.bin/webpack-dev-server --env.NODE_ENV=development --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -4,8 +4,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// UNCOMMENT TO RUN
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
@@ -31,6 +30,44 @@ module.exports = (env) => {
       loader: 'postcss-loader',
     },
   ];
+  const plugins = [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV),
+    }),
+    new UglifyJSPlugin({ sourceMap: true }),
+    new ExtractTextPlugin({
+      allChunks: true,
+      filename: 'styles.[contenthash].css',
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'public', 'index.html'),
+    }),
+    new CleanWebpackPlugin(['build']),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: ({ resource }) => (
+        resource !== undefined &&
+        resource.indexOf('node_modules') !== -1
+      ),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'main',
+      children: true,
+      async: true,
+      minChunks: ({ resource }) => (
+        resource !== undefined &&
+        resource.indexOf('node_modules') !== -1
+      ),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      minChunks: Infinity,
+    }),
+    new CopyWebpackPlugin([
+      { from: 'public/favicon.ico' },
+    ]),
+  ];
+  if (env.analyze) plugins.push(new BundleAnalyzerPlugin());
   return ({
     resolve: {
       extensions: ['.js', '.jsx'],
@@ -81,44 +118,6 @@ module.exports = (env) => {
         },
       ],
     },
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV),
-      }),
-      new UglifyJSPlugin({ sourceMap: true }),
-      new ExtractTextPlugin({
-        allChunks: true,
-        filename: 'styles.[contenthash].css',
-      }),
-      new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'public', 'index.html'),
-      }),
-      new CleanWebpackPlugin(['build']),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: ({ resource }) => (
-          resource !== undefined &&
-          resource.indexOf('node_modules') !== -1
-        ),
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'main',
-        children: true,
-        async: true,
-        minChunks: ({ resource }) => (
-          resource !== undefined &&
-          resource.indexOf('node_modules') !== -1
-        ),
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        minChunks: Infinity,
-      }),
-      // UNCOMMENT TO RUN
-      // new BundleAnalyzerPlugin(),
-      new CopyWebpackPlugin([
-        { from: 'public/favicon.ico' },
-      ]),
-    ],
+    plugins,
   });
 };
