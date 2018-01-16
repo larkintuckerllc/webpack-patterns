@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // UNCOMMENT TO RUN
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
@@ -115,7 +115,7 @@ module.exports = (env) => {
         minChunks: Infinity,
       }),
       // UNCOMMENT TO RUN
-      // new BundleAnalyzerPlugin(),
+      new BundleAnalyzerPlugin(),
       new CopyWebpackPlugin([
         { from: 'public/favicon.ico' },
       ]),
